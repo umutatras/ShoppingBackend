@@ -6,4 +6,12 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="Identity\" />
+    <Folder Include="Services\" />
+    <Folder Include="Persistance\Configurations\" />
+    <Folder Include="Persistance\Contexts\" />
+    <Folder Include="Persistance\Seeder\" />
+  </ItemGroup>
+
 </Project>

@@ -6,4 +6,14 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="Common\Behaviours\" />
+    <Folder Include="Common\Interfaces\" />
+    <Folder Include="Common\Models\Errors\" />
+    <Folder Include="Common\Models\General\" />
+    <Folder Include="Common\Models\Identity\" />
+    <Folder Include="Common\Models\Jwt\" />
+    <Folder Include="Features\" />
+  </ItemGroup>
+
 </Project>
