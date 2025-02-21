@@ -6,9 +6,9 @@ public class IdentityRefreshTokenResponse
     public DateTime Expires { get; set; }
     public IdentityRefreshTokenResponse()
     {
-        
+
     }
-    public IdentityRefreshTokenResponse(string acccessToken,DateTime expires)
+    public IdentityRefreshTokenResponse(string acccessToken, DateTime expires)
     {
         AccessToken = acccessToken;
         Expires = expires;

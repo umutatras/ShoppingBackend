@@ -42,6 +42,6 @@ public static class DependencyInjection
         .AddDefaultTokenProviders();
 
 
-             return services;
+        return services;
     }
 }

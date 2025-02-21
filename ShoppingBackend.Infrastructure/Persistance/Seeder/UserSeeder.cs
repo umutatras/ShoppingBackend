@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using ShoppingBackend.Infrastructure.Identity;
 
 namespace ShoppingBackend.Infrastructure.Persistance.Seeder;
