@@ -13,7 +13,10 @@
   <ItemGroup>
     <Folder Include="Controllers\" />
     <Folder Include="Filters\" />
-    <Folder Include="Services\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ShoppingBackend.Infrastructure\ShoppingBackend.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>
