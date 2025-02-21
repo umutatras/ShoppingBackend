@@ -1,5 +1,7 @@
-﻿namespace ShoppingBackend.Domain.Entities;
+﻿using ShoppingBackend.Domain.Common;
 
-public sealed class Basket
+namespace ShoppingBackend.Domain.Entities;
+
+public sealed class Basket : EntityBase<int>
 {
 }

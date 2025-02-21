@@ -1,5 +1,7 @@
-﻿namespace ShoppingBackend.Domain.Entities;
+﻿using ShoppingBackend.Domain.Common;
 
-public sealed class Category
+namespace ShoppingBackend.Domain.Entities;
+
+public sealed class Category : EntityBase<int>
 {
 }
