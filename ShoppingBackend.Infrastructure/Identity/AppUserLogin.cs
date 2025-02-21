@@ -1,5 +1,7 @@
-﻿namespace ShoppingBackend.Infrastructure.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 
-public sealed class AppUserLogin
+namespace ShoppingBackend.Infrastructure.Identity;
+
+public sealed class AppUserLogin : IdentityUserLogin<Guid>
 {
 }

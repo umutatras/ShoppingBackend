@@ -1,5 +1,7 @@
-﻿namespace ShoppingBackend.Infrastructure.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 
-public sealed class AppRole
+namespace ShoppingBackend.Infrastructure.Identity;
+
+public sealed class AppRole : IdentityRole<Guid>
 {
 }
