@@ -22,6 +22,7 @@ public static class DependencyInjection
         services.AddScoped<ICategoryService, CategoryManager>();
         services.AddScoped<IProductService, ProductManager>();
         services.AddScoped<IBasketService, BasketManager>();
+        services.AddScoped<IBasketItemService, BasketItemManager>();
 
         services.Configure<JwtSettings>(configuration.GetSection("JwtSettings"));
 
