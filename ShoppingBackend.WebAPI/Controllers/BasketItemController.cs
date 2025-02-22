@@ -5,6 +5,7 @@ using ShoppingBackend.Application.Features.Basket.Commands.Add;
 using ShoppingBackend.Application.Features.BasketItem.Commands.Add;
 using ShoppingBackend.Application.Features.BasketItem.Commands.Delete;
 using ShoppingBackend.Application.Features.BasketItem.Commands.Update;
+using ShoppingBackend.Application.Features.BasketItem.Query.GetAll;
 
 namespace ShoppingBackend.WebAPI.Controllers;
 
@@ -27,4 +28,8 @@ public class BasketItemController : ApiControllerBase
     [HttpDelete("basket-item-delete")]
     public async Task<IActionResult> BasketItemDelete(BasketItemDeleteCommand command, CancellationToken cancellationToken)
 => Ok(await Mediatr.Send(command, cancellationToken));
+
+    [HttpGet("basket-item-getall")]
+    public async Task<IActionResult> BasketItemGetAll([FromQuery]GetallBasketItemQuery query, CancellationToken cancellationToken)
+=> Ok(await Mediatr.Send(query, cancellationToken));
 }

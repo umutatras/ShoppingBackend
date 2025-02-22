@@ -1,9 +1,11 @@
-﻿using ShoppingBackend.Application.Common.Interfaces;
+﻿using Microsoft.EntityFrameworkCore;
+using ShoppingBackend.Application.Common.Interfaces;
 using ShoppingBackend.Application.Common.Models.Basket;
 using ShoppingBackend.Application.Common.Models.BasketItem;
 using ShoppingBackend.Application.Features.BasketItem.Commands.Add;
 using ShoppingBackend.Application.Features.BasketItem.Commands.Delete;
 using ShoppingBackend.Application.Features.BasketItem.Commands.Update;
+using ShoppingBackend.Application.Features.BasketItem.Query.GetAll;
 using ShoppingBackend.Domain.Entities;
 using System;
 using System.Collections.Generic;
@@ -21,6 +23,12 @@ public class BasketItemManager : IBasketItemService
     {
         _context = context;
         _currentUserService = currentUserService;
+    }
+
+    public async Task<List<BasketItemGetAllDto>> BasketGetAll(GetallBasketItemQuery request, CancellationToken cancellationToken)
+    {
+        var basketItems = await _context.BasketItems.Include(x => x.Product).Include(x => x.Basket).Select(x => new BasketItemGetAllDto { BasketId = x.BasketId, ProductAmount = x.Product.StockAmount, ProductId = x.ProductId, Quantity = x.Quantity, ProductName = x.Product.Name }).ToListAsync(cancellationToken);
+        return basketItems;
     }
 
     public async Task<BasketItemAddResponse> BasketItemAdd(BasketItemAddCommand request, CancellationToken cancellationToken)
