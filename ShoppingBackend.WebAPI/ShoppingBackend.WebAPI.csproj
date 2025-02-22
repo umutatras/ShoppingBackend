@@ -17,10 +17,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\ShoppingBackend.Infrastructure\ShoppingBackend.Infrastructure.csproj" />
   </ItemGroup>
 

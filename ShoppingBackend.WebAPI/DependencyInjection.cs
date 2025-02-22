@@ -1,10 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Localization;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using ShoppingBackend.Application.Common.Interfaces;
 using ShoppingBackend.WebAPI.Services;
-using System.Globalization;
 using System.Text;
 
 namespace ShoppingBackend.WebAPI;
@@ -26,7 +24,7 @@ public static class DependencyInjection
         services.AddScoped<ICurrentUserService, CurrentUserManager>();
         services.AddTransient<IEnvironmentService, EnvironmentManager>(sp => new EnvironmentManager(environment.WebRootPath));
 
-    
+
         services.AddAuthentication(options =>
         {
             options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;

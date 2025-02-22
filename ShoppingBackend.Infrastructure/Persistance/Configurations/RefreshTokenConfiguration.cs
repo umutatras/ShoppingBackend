@@ -29,7 +29,7 @@ namespace ShoppingBackend.Infrastructure.Persistance.Configurations
             builder.Property(x => x.Expires)
                 .IsRequired();
 
-     
+
 
             // SecurityStamp
             builder.Property(x => x.SecurityStamp)
