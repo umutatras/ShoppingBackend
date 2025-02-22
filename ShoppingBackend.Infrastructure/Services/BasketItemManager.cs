@@ -2,6 +2,7 @@
 using ShoppingBackend.Application.Common.Models.Basket;
 using ShoppingBackend.Application.Common.Models.BasketItem;
 using ShoppingBackend.Application.Features.BasketItem.Commands.Add;
+using ShoppingBackend.Application.Features.BasketItem.Commands.Delete;
 using ShoppingBackend.Application.Features.BasketItem.Commands.Update;
 using ShoppingBackend.Domain.Entities;
 using System;
@@ -32,6 +33,22 @@ public class BasketItemManager : IBasketItemService
             return new BasketItemAddResponse { BasketId = basketItem.BasketId, ProductId = basketItem.ProductId, Quantity = basketItem.Quantity };
         }
         return null;
+    }
+
+    public async Task<bool> BasketItemDelete(BasketItemDeleteCommand request, CancellationToken cancellationToken)
+    {
+        BasketItem basketItem = await _context.BasketItems.FindAsync(request.Id, cancellationToken);
+        if (basketItem == null)
+        {
+            return false;
+        }
+        _context.BasketItems.Remove(basketItem);
+        int etkilenenSatir = await _context.SaveChangesAsync(cancellationToken);
+        if (etkilenenSatir > 0)
+        {
+            return true;
+        }
+        return false;
     }
 
     public async Task<BasketItemUpdateResponse> BasketItemUpdate(BasketItemUpdateCommand request, CancellationToken cancellationToken)
