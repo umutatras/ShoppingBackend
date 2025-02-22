@@ -1,17 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using ShoppingBackend.Application.Common.Interfaces;
-using ShoppingBackend.Application.Common.Models.Basket;
 using ShoppingBackend.Application.Common.Models.BasketItem;
 using ShoppingBackend.Application.Features.BasketItem.Commands.Add;
 using ShoppingBackend.Application.Features.BasketItem.Commands.Delete;
 using ShoppingBackend.Application.Features.BasketItem.Commands.Update;
 using ShoppingBackend.Application.Features.BasketItem.Query.GetAll;
 using ShoppingBackend.Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ShoppingBackend.Infrastructure.Services;
 

@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ShoppingBackend.Application.Common.Models.BasketItem;
+﻿namespace ShoppingBackend.Application.Common.Models.BasketItem;
 
 public sealed record BasketItemGetAllDto
 {
@@ -13,7 +7,7 @@ public sealed record BasketItemGetAllDto
     public int Quantity { get; set; }
     public int ProductAmount { get; set; }
     public int BasketId { get; set; }
-    public BasketItemGetAllDto(int productId,string productName,int quantity,int productAmount,int basketId)
+    public BasketItemGetAllDto(int productId, string productName, int quantity, int productAmount, int basketId)
     {
         ProductId = productId;
         ProductAmount = productAmount;
@@ -23,6 +17,6 @@ public sealed record BasketItemGetAllDto
     }
     public BasketItemGetAllDto()
     {
-        
+
     }
 }

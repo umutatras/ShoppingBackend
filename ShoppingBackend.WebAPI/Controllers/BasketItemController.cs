@@ -1,7 +1,5 @@
 ﻿using MediatR;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using ShoppingBackend.Application.Features.Basket.Commands.Add;
 using ShoppingBackend.Application.Features.BasketItem.Commands.Add;
 using ShoppingBackend.Application.Features.BasketItem.Commands.Delete;
 using ShoppingBackend.Application.Features.BasketItem.Commands.Update;
@@ -30,6 +28,6 @@ public class BasketItemController : ApiControllerBase
 => Ok(await Mediatr.Send(command, cancellationToken));
 
     [HttpGet("basket-item-getall")]
-    public async Task<IActionResult> BasketItemGetAll([FromQuery]GetallBasketItemQuery query, CancellationToken cancellationToken)
+    public async Task<IActionResult> BasketItemGetAll([FromQuery] GetallBasketItemQuery query, CancellationToken cancellationToken)
 => Ok(await Mediatr.Send(query, cancellationToken));
 }
