@@ -16,4 +16,10 @@
     <ProjectReference Include="..\ShoppingBackend.Domain\ShoppingBackend.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Features\ProductCategory\Commands\Delete\" />
+    <Folder Include="Features\ProductCategory\Commands\Update\" />
+    <Folder Include="Features\ProductCategory\Query\" />
+  </ItemGroup>
+
 </Project>
