@@ -2,6 +2,7 @@
 using ShoppingBackend.Application.Common.Models.Basket;
 using ShoppingBackend.Application.Common.Models.Category;
 using ShoppingBackend.Application.Features.Basket.Commands.Add;
+using ShoppingBackend.Application.Features.Basket.Commands.Delete;
 using ShoppingBackend.Application.Features.Basket.Commands.Update;
 using ShoppingBackend.Domain.Entities;
 using System;
@@ -41,6 +42,22 @@ public sealed class BasketManager : IBasketService
             };
         }
         return null;
+    }
+
+    public async Task<bool> BasketDelete(BasketDeleteCommand request, CancellationToken cancellationToken)
+    {
+        Basket basket = await _context.Baskets.FindAsync(request.Id, cancellationToken);
+        if (basket == null)
+        {
+            return false;
+        }
+        _context.Baskets.Remove(basket);
+        int etkilenenSatir = await _context.SaveChangesAsync(cancellationToken);
+        if (etkilenenSatir > 0)
+        {
+            return true;
+        }
+        return false;
     }
 
     public async Task<BasketUpdateResponse> BasketUpdate(BasketUpdateCommand request, CancellationToken cancellationToken)
