@@ -6,6 +6,7 @@ using Microsoft.Extensions.Options;
 using ShoppingBackend.Application.Common.Interfaces;
 using ShoppingBackend.Application.Common.Models.Identity;
 using ShoppingBackend.Application.Common.Models.Jwt;
+using ShoppingBackend.Application.Features.Auth.Commands.UpdateUser;
 using ShoppingBackend.Domain.Entities;
 using ShoppingBackend.Domain.Settings;
 using ShoppingBackend.Infrastructure.Identity;
@@ -146,6 +147,41 @@ public class IdentityManager : IIdentityService
 
         // Kayıt yanıtını döndür.
         return new IdentityRegisterResponse(userId, user.Email, emailToken);
+    }
+
+    public async Task<bool> UpdateUserAsync(UpdateUserCommand request, CancellationToken cancellationToken)
+    {
+        var user = await _userManager.FindByIdAsync(request.UserId.ToString());
+        if (user == null)
+        {
+            return false;
+        }
+
+        // Güncellenecek bilgileri ayarla
+        user.FirstName = request.FirstName;
+        user.LastName = request.LastName;
+
+        // Şifre değiştirilecekse
+        if (!string.IsNullOrEmpty(request.Password))
+        {
+            var token = await _userManager.GeneratePasswordResetTokenAsync(user);
+            var passwordChangeResult = await _userManager.ResetPasswordAsync(user, token, request.Password);
+
+            if (!passwordChangeResult.Succeeded)
+            {
+                return false;
+            }
+        }
+
+        // Kullanıcıyı güncelle
+        var result = await _userManager.UpdateAsync(user);
+
+        if (result.Succeeded)
+        {
+            return true;
+        }       
+        CreateAndThrowValidationException(result.Errors);
+        return false;
     }
 
     public async Task<IdentityVerifyEmailResponse> VerifyEmailAsync(IdentityVerifyEmailRequest request, CancellationToken cancellationToken)

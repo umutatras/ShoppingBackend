@@ -3,6 +3,7 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using ShoppingBackend.Application.Features.Auth.Commands.Login;
 using ShoppingBackend.Application.Features.Auth.Commands.Register;
+using ShoppingBackend.Application.Features.Auth.Commands.UpdateUser;
 
 namespace ShoppingBackend.WebAPI.Controllers;
 
@@ -24,7 +25,9 @@ public class AuthController : ApiControllerBase
     {
         return Ok(await Mediatr.Send(command, cancellationToken));
     }
-
+    [HttpPost("update-user")]
+    public async Task<IActionResult> UpdateUser(UpdateUserCommand command, CancellationToken cancellationToken)
+=> Ok(await Mediatr.Send(command, cancellationToken));
 
     [HttpPost("refresh-token")]
     public async Task<IActionResult> RefreshToken(AuthRefreshTokenCommand command, CancellationToken cancellationToken)
