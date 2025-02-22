@@ -1,5 +1,4 @@
 ﻿using FluentValidation;
-using ShoppingBackend.Application.Features.Category.Commands.Update;
 
 namespace ShoppingBackend.Application.Features.Product.Commands.Update;
 

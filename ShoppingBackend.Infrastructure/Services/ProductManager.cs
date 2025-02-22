@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using ShoppingBackend.Application.Common.Interfaces;
-using ShoppingBackend.Application.Common.Models.Category;
 using ShoppingBackend.Application.Common.Models.Product;
 using ShoppingBackend.Application.Features.Product.Commands.Add;
 using ShoppingBackend.Application.Features.Product.Commands.Delete;

@@ -1,10 +1,9 @@
 ﻿using MediatR;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ShoppingBackend.Application.Features.Basket.Commands.Add;
 using ShoppingBackend.Application.Features.Basket.Commands.Delete;
 using ShoppingBackend.Application.Features.Basket.Commands.Update;
-using ShoppingBackend.Application.Features.Product.Commands.Add;
+using ShoppingBackend.Application.Features.Basket.Query.GetAll;
 
 namespace ShoppingBackend.WebAPI.Controllers;
 
@@ -28,4 +27,8 @@ public class BasketController : ApiControllerBase
     [HttpDelete("basket-delete")]
     public async Task<IActionResult> BasketDelete(BasketDeleteCommand command, CancellationToken cancellationToken)
 => Ok(await Mediatr.Send(command, cancellationToken));
+
+    [HttpGet("basket-getall")]
+    public async Task<IActionResult> GetAllAsync([FromQuery] GetallBasketQuery query, CancellationToken cancellationToken = default)
+=> Ok(await Mediatr.Send(query, cancellationToken));
 }

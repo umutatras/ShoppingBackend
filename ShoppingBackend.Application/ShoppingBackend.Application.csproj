@@ -16,8 +16,4 @@
     <ProjectReference Include="..\ShoppingBackend.Domain\ShoppingBackend.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Features\Basket\Query\GetAll\" />
-  </ItemGroup>
-
 </Project>

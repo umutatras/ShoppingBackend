@@ -1,15 +1,10 @@
 ﻿using ShoppingBackend.Application.Common.Interfaces;
 using ShoppingBackend.Application.Common.Models.Basket;
-using ShoppingBackend.Application.Common.Models.Category;
 using ShoppingBackend.Application.Features.Basket.Commands.Add;
 using ShoppingBackend.Application.Features.Basket.Commands.Delete;
 using ShoppingBackend.Application.Features.Basket.Commands.Update;
+using ShoppingBackend.Application.Features.Basket.Query.GetAll;
 using ShoppingBackend.Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ShoppingBackend.Infrastructure.Services;
 
@@ -32,8 +27,8 @@ public sealed class BasketManager : IBasketService
             UserId = Guid.Parse(request.UserId)
         };
         await _context.Baskets.AddAsync(basket);
-        int etkilenenSatir= await _context.SaveChangesAsync(cancellationToken);
-        if(etkilenenSatir > 0)
+        int etkilenenSatir = await _context.SaveChangesAsync(cancellationToken);
+        if (etkilenenSatir > 0)
         {
             return new BasketAddResponse
             {
@@ -80,5 +75,14 @@ public sealed class BasketManager : IBasketService
             };
         }
         return null;
+    }
+
+    public async Task<List<GetAllBasketDto>> GetAllBasket(GetallBasketQuery request, CancellationToken cancellationToken)
+    {
+        return _context.Baskets.Select(x => new GetAllBasketDto()
+        {
+            Id = x.Id,
+            UserId = x.UserId.ToString()
+        }).ToList();
     }
 }

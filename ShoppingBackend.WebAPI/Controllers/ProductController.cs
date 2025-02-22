@@ -28,6 +28,6 @@ public class ProductController : ApiControllerBase
 => Ok(await Mediatr.Send(command, cancellationToken));
 
     [HttpGet("product-getall")]
-    public async Task<IActionResult> ProductGetAll([FromQuery]GetAllProductQuery query, CancellationToken cancellationToken)
+    public async Task<IActionResult> ProductGetAll([FromQuery] GetAllProductQuery query, CancellationToken cancellationToken)
 => Ok(await Mediatr.Send(query, cancellationToken));
 }

@@ -1,6 +1,5 @@
 ﻿using MediatR;
 using ShoppingBackend.Application.Common.Models.General;
-using ShoppingBackend.Application.Features.Product.Commands.Add;
 
 namespace ShoppingBackend.Application.Features.Product.Commands.Update;
 
