@@ -2,6 +2,7 @@
 using ShoppingBackend.Application.Common.Models.BasketItem;
 using ShoppingBackend.Application.Common.Models.ProductCategory;
 using ShoppingBackend.Application.Features.ProductCategory.Commands.Add;
+using ShoppingBackend.Application.Features.ProductCategory.Commands.Delete;
 using ShoppingBackend.Application.Features.ProductCategory.Commands.Update;
 using ShoppingBackend.Domain.Entities;
 
@@ -27,6 +28,22 @@ public class ProductCategoryManager : IProductCategoryService
             return new ProductCategoryAddResponse { CategoryId = productCategory.CategoryId, ProductId = productCategory.ProductId };
         }
         return null;
+    }
+
+    public async Task<bool> ProductCategoryDelete(ProductCategoryDeleteCommand request, CancellationToken cancellationToken)
+    {
+        ProductCategory productCategory = await _context.ProductCategories.FindAsync(request.Id, cancellationToken);
+        if (productCategory == null)
+        {
+            return false;
+        }
+        _context.ProductCategories.Remove(productCategory);
+        int etkilenenSatir = await _context.SaveChangesAsync(cancellationToken);
+        if (etkilenenSatir > 0)
+        {
+            return true;
+        }
+        return false;
     }
 
     public async Task<ProductCategoryUpdateResponse> ProductCategoryUpdate(ProductCategoryUpdateCommand request, CancellationToken cancellationToken)

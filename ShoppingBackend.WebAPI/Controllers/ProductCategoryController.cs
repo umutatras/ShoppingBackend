@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using ShoppingBackend.Application.Features.ProductCategory.Commands.Add;
+using ShoppingBackend.Application.Features.ProductCategory.Commands.Delete;
 using ShoppingBackend.Application.Features.ProductCategory.Commands.Update;
 
 namespace ShoppingBackend.WebAPI.Controllers
@@ -19,6 +20,10 @@ namespace ShoppingBackend.WebAPI.Controllers
 
         [HttpPut("product-category-update")]
         public async Task<IActionResult> ProductCategoryUpdate(ProductCategoryUpdateCommand command, CancellationToken cancellationToken)
+=> Ok(await Mediatr.Send(command, cancellationToken));
+
+        [HttpDelete("product-category-delete")]
+        public async Task<IActionResult> ProductCategoryDelete(ProductCategoryDeleteCommand command, CancellationToken cancellationToken)
 => Ok(await Mediatr.Send(command, cancellationToken));
     }
 }

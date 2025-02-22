@@ -17,8 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Features\ProductCategory\Commands\Delete\" />
-    <Folder Include="Features\ProductCategory\Query\" />
+    <Folder Include="Features\ProductCategory\Query\GetAll\" />
   </ItemGroup>
 
 </Project>
