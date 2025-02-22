@@ -19,6 +19,7 @@ public static class DependencyInjection
         services.AddDbContext<ApplicationDbContext>(opt => opt.UseSqlServer(connectionString));
 
         services.AddScoped<IApplicationDbContext, ApplicationDbContext>();
+        services.AddScoped<ICategoryService, CategoryManager>();
 
         services.Configure<JwtSettings>(configuration.GetSection("JwtSettings"));
 
