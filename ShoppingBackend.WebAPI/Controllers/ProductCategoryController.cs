@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using ShoppingBackend.Application.Features.ProductCategory.Commands.Add;
 using ShoppingBackend.Application.Features.ProductCategory.Commands.Delete;
 using ShoppingBackend.Application.Features.ProductCategory.Commands.Update;
+using ShoppingBackend.Application.Features.ProductCategory.Query.GetAll;
 
 namespace ShoppingBackend.WebAPI.Controllers
 {
@@ -25,5 +26,9 @@ namespace ShoppingBackend.WebAPI.Controllers
         [HttpDelete("product-category-delete")]
         public async Task<IActionResult> ProductCategoryDelete(ProductCategoryDeleteCommand command, CancellationToken cancellationToken)
 => Ok(await Mediatr.Send(command, cancellationToken));
+
+        [HttpGet("product-category-getall")]
+        public async Task<IActionResult> ProductCategoryGetAll([FromQuery]GetAllProductCategoryQuery query, CancellationToken cancellationToken)
+=> Ok(await Mediatr.Send(query, cancellationToken));
     }
 }

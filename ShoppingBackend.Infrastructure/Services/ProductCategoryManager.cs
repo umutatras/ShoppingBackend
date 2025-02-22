@@ -1,9 +1,11 @@
-﻿using ShoppingBackend.Application.Common.Interfaces;
+﻿using Microsoft.EntityFrameworkCore;
+using ShoppingBackend.Application.Common.Interfaces;
 using ShoppingBackend.Application.Common.Models.BasketItem;
 using ShoppingBackend.Application.Common.Models.ProductCategory;
 using ShoppingBackend.Application.Features.ProductCategory.Commands.Add;
 using ShoppingBackend.Application.Features.ProductCategory.Commands.Delete;
 using ShoppingBackend.Application.Features.ProductCategory.Commands.Update;
+using ShoppingBackend.Application.Features.ProductCategory.Query.GetAll;
 using ShoppingBackend.Domain.Entities;
 
 namespace ShoppingBackend.Infrastructure.Services;
@@ -44,6 +46,11 @@ public class ProductCategoryManager : IProductCategoryService
             return true;
         }
         return false;
+    }
+
+    public Task<List<GetAllProductCategoryDto>> ProductCategoryGetAll(GetAllProductCategoryQuery request, CancellationToken cancellationToken)
+    {
+        return _context.ProductCategories.Select(x => new GetAllProductCategoryDto { CategoryId = x.CategoryId, ProductId = x.ProductId }).ToListAsync(cancellationToken);
     }
 
     public async Task<ProductCategoryUpdateResponse> ProductCategoryUpdate(ProductCategoryUpdateCommand request, CancellationToken cancellationToken)
