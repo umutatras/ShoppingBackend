@@ -1,9 +1,11 @@
-﻿using ShoppingBackend.Application.Common.Interfaces;
+﻿using Microsoft.EntityFrameworkCore;
+using ShoppingBackend.Application.Common.Interfaces;
 using ShoppingBackend.Application.Common.Models.Category;
 using ShoppingBackend.Application.Common.Models.Product;
 using ShoppingBackend.Application.Features.Product.Commands.Add;
 using ShoppingBackend.Application.Features.Product.Commands.Delete;
 using ShoppingBackend.Application.Features.Product.Commands.Update;
+using ShoppingBackend.Application.Features.Product.Query.GetAll;
 using ShoppingBackend.Domain.Entities;
 
 namespace ShoppingBackend.Infrastructure.Services;
@@ -17,6 +19,24 @@ public sealed class ProductManager : IProductService
     {
         _currentUserService = currentUserService;
         _context = context;
+    }
+
+    public async Task<List<GetAllProductDto>> GetAllProducts(GetAllProductQuery query, CancellationToken cancellationToken)
+    {
+        var products = await _context.Product.Select(x => new GetAllProductDto
+        {
+            Id = x.Id,
+            Name = x.Name,
+            StockAmount = x.StockAmount,
+            Code = x.Code,
+            Categories = x.ProductCategories.Select(x => new ProductCategories
+            {
+                Id = x.CategoryId,
+                Name = x.Category.Name
+            }).ToList()
+        }
+            ).ToListAsync();
+        return products;
     }
 
     public async Task<ProductAddResponse> ProductAdd(ProductAddCommand request, CancellationToken cancellationToken)
@@ -70,7 +90,7 @@ public sealed class ProductManager : IProductService
         }
         product.Name = request.Name;
         product.StockAmount = request.StockAmount;
-        product.Code = request.Code;       
+        product.Code = request.Code;
         product.ModifiedByUserId = _currentUserService.UserId.ToString();
         product.ModifiedOn = DateTime.Now;
         int etkilenenSatir = await _context.SaveChangesAsync(cancellationToken);
@@ -81,7 +101,7 @@ public sealed class ProductManager : IProductService
                 Id = product.Id,
                 Name = product.Name,
                 StockAmount = product.StockAmount,
-                Code=product.Code
+                Code = product.Code
             };
         }
         return null;
