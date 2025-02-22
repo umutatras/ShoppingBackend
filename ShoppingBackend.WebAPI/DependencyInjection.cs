@@ -13,7 +13,6 @@ public static class DependencyInjection
 {
     public static IServiceCollection AddWebApi(this IServiceCollection services, IConfiguration configuration, IWebHostEnvironment environment)
     {
-        services.AddMemoryCache();
         services.AddCors(options =>
         {
             options.AddPolicy("AllowAll",
@@ -27,20 +26,7 @@ public static class DependencyInjection
         services.AddScoped<ICurrentUserService, CurrentUserManager>();
         services.AddTransient<IEnvironmentService, EnvironmentManager>(sp => new EnvironmentManager(environment.WebRootPath));
 
-        services.AddLocalization(options => options.ResourcesPath = "Resources");
-
-        services.Configure<RequestLocalizationOptions>(options =>
-        {
-            var defaultCulture = new CultureInfo("tr-TR");
-
-            var supportedCultures = new List<CultureInfo> { defaultCulture,
-                new CultureInfo("en-GB")};
-
-            options.DefaultRequestCulture = new RequestCulture(defaultCulture);
-            options.SupportedCultures = supportedCultures;
-            options.SupportedUICultures = supportedCultures;
-            options.ApplyCurrentCultureToResponseHeaders = true;
-        });
+    
         services.AddAuthentication(options =>
         {
             options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;

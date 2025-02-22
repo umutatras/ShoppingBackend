@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using ShoppingBackend.Domain.Entities;
 using ShoppingBackend.Infrastructure.Identity;
 
 namespace ShoppingBackend.Infrastructure.Persistance.Configurations;
@@ -49,6 +50,8 @@ public class UserConfiguration : IEntityTypeConfiguration<AppUser>
 
         // Each User can have many entries in the UserRole join table
         builder.HasMany<AppUserRole>().WithOne().HasForeignKey(ur => ur.UserId).IsRequired();
+
+        builder.HasMany<Basket>().WithOne().HasForeignKey(x => x.UserId);
 
 
 

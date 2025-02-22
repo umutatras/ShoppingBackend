@@ -1,18 +1,20 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
+using ShoppingBackend.Infrastructure.Persistance.Contexts;
 
-namespace ShoppingBackend.Infrastructure.Persistance.Contexts;
-
-public sealed class ApplicationDbContextFactory : IDesignTimeDbContextFactory<ApplicationDbContext>
+namespace ShoppingBackend.Infrastructure.Contexts
 {
-    public ApplicationDbContext CreateDbContext(string[] args)
+    public class ApplicationDbContextFactory : IDesignTimeDbContextFactory<ApplicationDbContext>
     {
-        var configuration = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory())
-            .AddJsonFile("appsettings.json")
-            .Build();
-        var optionsBuilder = new DbContextOptionsBuilder<ApplicationDbContext>();
-        optionsBuilder.UseSqlServer(configuration.GetConnectionString("DefaultConnection"));
-        return new ApplicationDbContext(optionsBuilder.Options);
+        public ApplicationDbContext CreateDbContext(string[] args)
+        {
+            var configuration = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory())
+              .AddJsonFile("appsettings.json")
+              .Build();
+            var optionsBuilder = new DbContextOptionsBuilder<ApplicationDbContext>();
+            optionsBuilder.UseSqlServer(configuration.GetConnectionString("DefaultConnection"));
+            return new ApplicationDbContext(optionsBuilder.Options);
+        }
     }
 }

@@ -29,19 +29,7 @@ namespace ShoppingBackend.Infrastructure.Persistance.Configurations
             builder.Property(x => x.Expires)
                 .IsRequired();
 
-            // CreatedByIp
-            builder.Property(x => x.CreatedByIp)
-                .IsRequired()
-                .HasMaxLength(40);
-
-            // Revoked
-            builder.Property(x => x.Revoked)
-                .IsRequired(false);
-
-            // RevokedByIp
-            builder.Property(x => x.RevokedByIp)
-                .IsRequired(false)
-                .HasMaxLength(40);
+     
 
             // SecurityStamp
             builder.Property(x => x.SecurityStamp)
