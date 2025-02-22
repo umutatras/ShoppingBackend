@@ -1,6 +1,8 @@
 ﻿using ShoppingBackend.Application.Common.Interfaces;
 using ShoppingBackend.Application.Common.Models.Basket;
+using ShoppingBackend.Application.Common.Models.Category;
 using ShoppingBackend.Application.Features.Basket.Commands.Add;
+using ShoppingBackend.Application.Features.Basket.Commands.Update;
 using ShoppingBackend.Domain.Entities;
 using System;
 using System.Collections.Generic;
@@ -36,6 +38,28 @@ public sealed class BasketManager : IBasketService
             {
                 Id = basket.Id,
                 UserId = basket.UserId.ToString()
+            };
+        }
+        return null;
+    }
+
+    public async Task<BasketUpdateResponse> BasketUpdate(BasketUpdateCommand request, CancellationToken cancellationToken)
+    {
+        Basket basket = await _context.Baskets.FindAsync(request.Id, cancellationToken);
+        if (basket == null)
+        {
+            return null;
+        }
+        basket.UserId = Guid.Parse(request.UserId);
+        basket.ModifiedByUserId = _currentUserService.UserId.ToString();
+        basket.ModifiedOn = DateTime.Now;
+        int etkilenenSatir = await _context.SaveChangesAsync(cancellationToken);
+        if (etkilenenSatir > 0)
+        {
+            return new BasketUpdateResponse
+            {
+                Id = basket.Id,
+                UserId = basket.UserId.ToString(),
             };
         }
         return null;

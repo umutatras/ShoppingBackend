@@ -18,7 +18,6 @@
 
   <ItemGroup>
     <Folder Include="Features\Basket\Commands\Delete\" />
-    <Folder Include="Features\Basket\Commands\Update\" />
     <Folder Include="Features\Basket\Query\GetAll\" />
   </ItemGroup>
 
