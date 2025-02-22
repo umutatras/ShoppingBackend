@@ -16,8 +16,4 @@
     <ProjectReference Include="..\ShoppingBackend.Domain\ShoppingBackend.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Features\Category\Query\" />
-  </ItemGroup>
-
 </Project>

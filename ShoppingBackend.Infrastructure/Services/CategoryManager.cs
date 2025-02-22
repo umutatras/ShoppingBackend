@@ -1,8 +1,10 @@
-﻿using ShoppingBackend.Application.Common.Interfaces;
+﻿using Microsoft.EntityFrameworkCore;
+using ShoppingBackend.Application.Common.Interfaces;
 using ShoppingBackend.Application.Common.Models.Category;
 using ShoppingBackend.Application.Features.Category.Commands.Add;
 using ShoppingBackend.Application.Features.Category.Commands.Delete;
 using ShoppingBackend.Application.Features.Category.Commands.Update;
+using ShoppingBackend.Application.Features.Category.Query.GetAll;
 using ShoppingBackend.Domain.Entities;
 
 namespace ShoppingBackend.Infrastructure.Services;
@@ -74,5 +76,13 @@ public class CategoryManager : ICategoryService
             };
         }
         return null;
+    }
+
+    public async Task<List<GetAllCategoriesDto>> GetAllCategories(GetAllCategoriesQuery query, CancellationToken cancellationToken)
+    {
+        List<GetAllCategoriesDto> categories = await _context.Categories
+            .Select(x => new GetAllCategoriesDto { Id = x.Id, Name = x.Name })
+            .ToListAsync(cancellationToken);
+        return categories;
     }
 }
