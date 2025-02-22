@@ -1,12 +1,6 @@
 ﻿using MediatR;
-using Microsoft.EntityFrameworkCore;
 using ShoppingBackend.Application.Common.Interfaces;
 using ShoppingBackend.Application.Common.Models.General;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ShoppingBackend.Application.Features.Category.Query.GetAll;
 

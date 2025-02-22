@@ -58,7 +58,7 @@ public class CategoryManager : ICategoryService
 
     public async Task<CategoryUpdateResponse> CategoryUpdate(CategoryUpdateCommand request, CancellationToken cancellationToken)
     {
-        Category category = await _context.Categories.FindAsync(request.Id , cancellationToken);
+        Category category = await _context.Categories.FindAsync(request.Id, cancellationToken);
         if (category == null)
         {
             return null;

@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using ShoppingBackend.Application.Features.Product.Commands.Add;
+using ShoppingBackend.Application.Features.Product.Commands.Update;
 
 namespace ShoppingBackend.WebAPI.Controllers;
 
@@ -14,5 +15,9 @@ public class ProductController : ApiControllerBase
     }
     [HttpPost("product-add")]
     public async Task<IActionResult> ProductAdd(ProductAddCommand command, CancellationToken cancellationToken)
+=> Ok(await Mediatr.Send(command, cancellationToken));
+
+    [HttpPost("product-update")]
+    public async Task<IActionResult> ProductUpdate(ProductUpdateCommand command, CancellationToken cancellationToken)
 => Ok(await Mediatr.Send(command, cancellationToken));
 }

@@ -2,16 +2,12 @@
 using ShoppingBackend.Application.Common.Models.Category;
 using ShoppingBackend.Application.Common.Models.Product;
 using ShoppingBackend.Application.Features.Product.Commands.Add;
+using ShoppingBackend.Application.Features.Product.Commands.Update;
 using ShoppingBackend.Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ShoppingBackend.Infrastructure.Services;
 
-public sealed class ProductManager:IProductService
+public sealed class ProductManager : IProductService
 {
     private readonly IApplicationDbContext _context;
     private readonly ICurrentUserService _currentUserService;
@@ -36,7 +32,34 @@ public sealed class ProductManager:IProductService
         int etkilenenSatir = await _context.SaveChangesAsync(cancellationToken);
         if (etkilenenSatir > 0)
         {
-            return  new ProductAddResponse
+            return new ProductAddResponse
+            {
+                Id = product.Id,
+                Name = product.Name,
+                StockAmount = product.StockAmount,
+                Code = product.Code
+            };
+        }
+        return null;
+
+    }
+
+    public async Task<ProductUpdateResponse> ProductUpdate(ProductUpdateCommand request, CancellationToken cancellationToken)
+    {
+        Product product = await _context.Product.FindAsync(request.Id, cancellationToken);
+        if (product == null)
+        {
+            return null;
+        }
+        product.Name = request.Name;
+        product.StockAmount = request.StockAmount;
+        product.Code = request.Code;       
+        product.ModifiedByUserId = _currentUserService.UserId.ToString();
+        product.ModifiedOn = DateTime.Now;
+        int etkilenenSatir = await _context.SaveChangesAsync(cancellationToken);
+        if (etkilenenSatir > 0)
+        {
+            return new ProductUpdateResponse
             {
                 Id = product.Id,
                 Name = product.Name,
@@ -45,6 +68,5 @@ public sealed class ProductManager:IProductService
             };
         }
         return null;
-
     }
 }

@@ -31,6 +31,6 @@ public class CategoryController : ApiControllerBase
 
     [HttpGet("category-getall")]
     public async Task<IActionResult> GetAllAsync([FromQuery] GetAllCategoriesQuery query, CancellationToken cancellationToken = default)
-   =>Ok(await Mediatr.Send(query, cancellationToken));
-    
+   => Ok(await Mediatr.Send(query, cancellationToken));
+
 }
