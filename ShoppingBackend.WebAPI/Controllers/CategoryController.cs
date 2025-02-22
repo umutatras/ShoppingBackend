@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ShoppingBackend.Application.Features.Category.Commands.Add;
+using ShoppingBackend.Application.Features.Category.Commands.Delete;
 using ShoppingBackend.Application.Features.Category.Commands.Update;
 
 namespace ShoppingBackend.WebAPI.Controllers;
@@ -23,4 +24,7 @@ public class CategoryController : ApiControllerBase
     public async Task<IActionResult> CategoryUpdate(CategoryUpdateCommand command, CancellationToken cancellationToken)
 => Ok(await Mediatr.Send(command, cancellationToken));
 
+    [HttpPost("category-delete")]
+    public async Task<IActionResult> CategoryDelete(CategoryDeleteCommand command, CancellationToken cancellationToken)
+=> Ok(await Mediatr.Send(command, cancellationToken));
 }

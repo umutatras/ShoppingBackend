@@ -1,6 +1,7 @@
 ﻿using ShoppingBackend.Application.Common.Interfaces;
 using ShoppingBackend.Application.Common.Models.Category;
 using ShoppingBackend.Application.Features.Category.Commands.Add;
+using ShoppingBackend.Application.Features.Category.Commands.Delete;
 using ShoppingBackend.Application.Features.Category.Commands.Update;
 using ShoppingBackend.Domain.Entities;
 
@@ -35,6 +36,22 @@ public class CategoryManager : ICategoryService
             };
         }
         return null;
+    }
+
+    public async Task<bool> CategoryDelete(CategoryDeleteCommand request, CancellationToken cancellationToken)
+    {
+        Category category = await _context.Categories.FindAsync(request.Id, cancellationToken);
+        if (category == null)
+        {
+            return false;
+        }
+        _context.Categories.Remove(category);
+        int etkilenenSatir = await _context.SaveChangesAsync(cancellationToken);
+        if (etkilenenSatir > 0)
+        {
+            return true;
+        }
+        return false;
     }
 
     public async Task<CategoryUpdateResponse> CategoryUpdate(CategoryUpdateCommand request, CancellationToken cancellationToken)
