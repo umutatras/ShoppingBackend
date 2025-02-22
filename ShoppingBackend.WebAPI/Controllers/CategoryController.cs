@@ -21,11 +21,11 @@ public class CategoryController : ApiControllerBase
     public async Task<IActionResult> CategoryAdd(CategoryAddCommand command, CancellationToken cancellationToken)
 => Ok(await Mediatr.Send(command, cancellationToken));
 
-    [HttpPost("category-update")]
+    [HttpPut("category-update")]
     public async Task<IActionResult> CategoryUpdate(CategoryUpdateCommand command, CancellationToken cancellationToken)
 => Ok(await Mediatr.Send(command, cancellationToken));
 
-    [HttpPost("category-delete")]
+    [HttpDelete("category-delete")]
     public async Task<IActionResult> CategoryDelete(CategoryDeleteCommand command, CancellationToken cancellationToken)
 => Ok(await Mediatr.Send(command, cancellationToken));
 

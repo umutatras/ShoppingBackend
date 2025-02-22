@@ -2,6 +2,7 @@
 using ShoppingBackend.Application.Common.Models.Category;
 using ShoppingBackend.Application.Common.Models.Product;
 using ShoppingBackend.Application.Features.Product.Commands.Add;
+using ShoppingBackend.Application.Features.Product.Commands.Delete;
 using ShoppingBackend.Application.Features.Product.Commands.Update;
 using ShoppingBackend.Domain.Entities;
 
@@ -42,6 +43,22 @@ public sealed class ProductManager : IProductService
         }
         return null;
 
+    }
+
+    public async Task<bool> ProductDelete(ProductDeleteCommand request, CancellationToken cancellationToken)
+    {
+        Product product = await _context.Product.FindAsync(request.Id, cancellationToken);
+        if (product == null)
+        {
+            return false;
+        }
+        _context.Product.Remove(product);
+        int etkilenenSatir = await _context.SaveChangesAsync(cancellationToken);
+        if (etkilenenSatir > 0)
+        {
+            return true;
+        }
+        return false;
     }
 
     public async Task<ProductUpdateResponse> ProductUpdate(ProductUpdateCommand request, CancellationToken cancellationToken)
