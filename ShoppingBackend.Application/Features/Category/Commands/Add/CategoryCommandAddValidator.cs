@@ -1,10 +1,4 @@
 ﻿using FluentValidation;
-using ShoppingBackend.Application.Features.Auth.Commands.UpdateUser;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ShoppingBackend.Application.Features.Category.Commands.Add;
 

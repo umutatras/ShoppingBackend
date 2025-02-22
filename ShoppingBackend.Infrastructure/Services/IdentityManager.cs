@@ -179,7 +179,7 @@ public class IdentityManager : IIdentityService
         if (result.Succeeded)
         {
             return true;
-        }       
+        }
         CreateAndThrowValidationException(result.Errors);
         return false;
     }
