@@ -6,10 +6,10 @@ public sealed class CategoryAddDto
 {
     public int Id { get; set; }
     public string Name { get; set; } = null!;
-    public CategoryAddDto(int id, string Name)
+    public CategoryAddDto(int id, string name)
     {
         Id = id;
-        Name = Name;
+        Name = name;
     }
 
     public static CategoryAddDto Create(CategoryAddResponse response)
